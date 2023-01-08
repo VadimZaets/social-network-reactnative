@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import * as Font from "expo-font";
-import RegistrationScreen from "./src/screens/RegistrationScreen/RegistrationScreen";
+import { NavigationContainer } from "@react-navigation/native";
 import AuthNavigation from "./src/navigation/AuthNavigation/AuthNavigation";
+import HomeNavigation from "./src/navigation/HomeNavigation/HomeNavigation";
 const loadFonts = async () => {
   await Font.loadAsync({
     "Roboto-Regulat": require("./assets/fonts/Roboto/Roboto-Regular.ttf"),
@@ -13,7 +14,10 @@ const loadFonts = async () => {
 export default function App() {
   return (
     <View style={styles.container}>
-      <AuthNavigation />
+      <NavigationContainer>
+        {/* <AuthNavigation /> */}
+        <HomeNavigation />
+      </NavigationContainer>
     </View>
   );
 }

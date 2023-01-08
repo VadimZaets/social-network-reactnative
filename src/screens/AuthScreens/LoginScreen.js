@@ -14,16 +14,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
 } from "react-native";
-import * as Font from "expo-font";
-import { Link } from "@react-navigation/native";
-const Login = () => {
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      "Roboto-Regular": require("../../../assets/fonts/Roboto/Roboto-Regular.ttf"),
-      "Roboto-Medium": require("../../../assets/fonts/Roboto/Roboto-Medium.ttf"),
-      "Roboto-Bold": require("../../../assets/fonts/Roboto/Roboto-Bold.ttf"),
-    });
-  };
+
+const LoginScreen = ({ navigation }) => {
   const [isKeyboardShow, setIsKeyboardShow] = useState(false);
   const [value, setValue] = useState("");
   const inputHandler = (text) => setValue(text);
@@ -54,12 +46,15 @@ const Login = () => {
                 onFocus={() => setIsKeyboardShow(true)}
               />
 
-              <Pressable style={styles.btn}>
+              <TouchableOpacity style={styles.btn}>
                 <Text style={styles.btnText}>Увійти</Text>
-              </Pressable>
-              <Link to={{ screen: "Registration" }} style={styles.link}>
-                Немає акаунту? Зареєструватись
-              </Link>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Registration")}
+                style={styles.link}
+              >
+                <Text>Немає акаунту? Зареєструватись</Text>
+              </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
@@ -68,7 +63,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {

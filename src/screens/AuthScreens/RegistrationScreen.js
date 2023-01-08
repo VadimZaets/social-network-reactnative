@@ -14,10 +14,11 @@ import {
   Keyboard,
   KeyboardAvoidingView,
 } from "react-native";
-import * as Font from "expo-font";
+
 import * as ImagePicker from "expo-image-picker";
-import { Link } from "@react-navigation/native";
+
 import { AntDesign } from "@expo/vector-icons";
+
 const initialState = {
   login: "",
   email: "",
@@ -25,14 +26,7 @@ const initialState = {
   avatarImage: null,
 };
 
-const Registration = () => {
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      "Roboto-Regular": require("../../../assets/fonts/Roboto/Roboto-Regular.ttf"),
-      "Roboto-Medium": require("../../../assets/fonts/Roboto/Roboto-Medium.ttf"),
-      "Roboto-Bold": require("../../../assets/fonts/Roboto/Roboto-Bold.ttf"),
-    });
-  };
+const RegistrationScreen = ({ navigation }) => {
   const [isKeyboardShow, setIsKeyboardShow] = useState(false);
   const [form, setForm] = useState(initialState);
 
@@ -130,12 +124,15 @@ const Registration = () => {
                 onFocus={() => setIsKeyboardShow(true)}
               />
 
-              <Pressable style={styles.btn}>
+              <TouchableOpacity style={styles.btn}>
                 <Text style={styles.btnText}>Зареєструватись</Text>
-              </Pressable>
-              <Link to={{ screen: "Login" }} style={styles.link}>
-                Вже є обліковий запис? Увійти
-              </Link>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Login")}
+                style={styles.link}
+              >
+                <Text> Вже є обліковий запис? Увійти</Text>
+              </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
@@ -144,7 +141,7 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default RegistrationScreen;
 
 const styles = StyleSheet.create({
   container: {
